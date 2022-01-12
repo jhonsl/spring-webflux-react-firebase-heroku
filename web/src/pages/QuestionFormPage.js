@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { postQuestion } from '../actions/questionActions'
 import { connect } from 'react-redux'
+import SunEditor from "suneditor-react/dist/SunEditor";
+import 'suneditor/dist/css/suneditor.min.css'; 
 
 const FormPage = ({ dispatch, loading, redirect, userId }) => {
     const { register, handleSubmit } = useForm();
@@ -48,7 +50,7 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
 
                 <div>
                     <label for="question">Question</label>
-                    <textarea id="question" {...register("question", { required: true, maxLength: 300 })} />
+                    <SunEditor id="question" {...register("question", { required: true, maxLength: 300 })} />
                 </div>
                 <button type="submit" className="button" disabled={loading} >{
                     loading ? "Saving ...." : "Save"

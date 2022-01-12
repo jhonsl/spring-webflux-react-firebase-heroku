@@ -17,6 +17,7 @@ import QuestionsPage from './pages/QuestionsPage'
 import QuestionFormPage from './pages/QuestionFormPage'
 import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
+import { Footer } from './components/Footer';
 import { useAuthState } from "react-firebase-hooks/auth";
 
 firebase.initializeApp({
@@ -51,6 +52,7 @@ const App = ({ dispatch }) => {
             <Route exact path="/new" component={QuestionFormPage} />
             <Redirect to="/" />
           </Switch>
+          <Footer />
         </> :
         <>
           <PublicNavbar />
@@ -63,6 +65,7 @@ const App = ({ dispatch }) => {
             <Route exact path="/answer/:id" component={AnswerFormPage} />
             <Redirect to="/" />
           </Switch>
+          <Footer />
         </>
       }
     </Router>

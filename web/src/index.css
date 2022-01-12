@@ -104,4 +104,15 @@ body {
   .right {
     float: right;
   }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    color:#ea3546;
+    height: 8%;
+    width: 100%;
+    text-align: center;
+    z-index: 99;
+  }
   

@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import {  fetchQuestion, postAnswer } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import { Question } from '../components/Question'
+import SunEditor from "suneditor-react/dist/SunEditor";
+import 'suneditor/dist/css/suneditor.min.css'; 
+import suneditor from "suneditor";
 
 const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, userId }) => {
     const { register, handleSubmit } = useForm();
@@ -42,7 +45,7 @@ const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, user
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label for="answer">Answer</label>
-                    <textarea id="answer" {...register("answer", { required: true, maxLength: 300 })} />
+                    <SunEditor id="answer" {...register("answer", { required: true, maxLength: 300 })} />
                 </div>
                 <button type="submit" className="button" disabled={loading} >{
                     loading ? "Saving ...." : "Save"

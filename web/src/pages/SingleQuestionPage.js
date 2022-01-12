@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchQuestion } from '../actions/questionActions'
@@ -39,6 +39,14 @@ const SingleQuestionPage = ({
       {userId && <Link to={"/answer/" + id} className="button right">
         Reply
       </Link>}
+  
+      <h5>Rating:</h5>
+
+      <tr>
+        <td><button onClick={() => alert("😀")}>😀</button></td>
+        <td><button onClick={() => alert("😐")}>😐</button></td>
+        <td><button onClick={() => alert("😕")}>😕</button></td>
+      </tr>
 
       <h2>Answers</h2>
       {renderAnswers()}
