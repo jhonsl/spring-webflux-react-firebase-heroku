@@ -1,22 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {  fetchQuestion, postAnswer } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import { Question } from '../components/Question'
-import SunEditor from "suneditor-react/dist/SunEditor";
-import 'suneditor/dist/css/suneditor.min.css'; 
-import suneditor from "suneditor";
+import JoditEditor from "jodit-react";
 
 const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, userId }) => {
     const { register, handleSubmit } = useForm();
+    const [content, setContent] = useState("");
     const { id } = match.params
     const history = useHistory();
 
     const onSubmit = data => {
-        data.userId =  userId;
-        data.questionId = id;
-        dispatch(postAnswer(data));
+        if(content != ""){
+            data.userId = userId;
+            data.question = question;
+            data.questionId = id;
+            data.answer = content.slice(3,-4)
+            dispatch(postAnswer(data));
+        }
     };
 
     useEffect(() => {
@@ -45,7 +48,7 @@ const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, user
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label for="answer">Answer</label>
-                    <SunEditor id="answer" {...register("answer", { required: true, maxLength: 300 })} />
+                    <JoditEditor id="answer" onBlur={newContent => setContent(newContent)} />
                 </div>
                 <button type="submit" className="button" disabled={loading} >{
                     loading ? "Saving ...." : "Save"

@@ -12,7 +12,6 @@ body {
   nav {
     display: flex;
     padding: 2rem 0;
-    background: #111;
   }
   
   nav section {
@@ -110,7 +109,7 @@ body {
     bottom: 0;
     background-color: black;
     color:#ea3546;
-    height: 8%;
+    height:5%;
     width: 100%;
     text-align: center;
     z-index: 99;
