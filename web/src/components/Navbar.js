@@ -14,7 +14,7 @@ export const PublicNavbar = ({dispatch}) => (
       <a className='navbar-brand mx-3' href='#'>
         <img
           src={logo}
-          width="50"
+          width="60"
           height="50"
         />
         SofkaQuestions
@@ -57,7 +57,7 @@ export const PrivateNavbar = ({dispatch}) => (
       <a className='navbar-brand mx-2' href='#'>
         <img
           src={logo}
-          width="50"
+          width="60"
           height="50"
         />
         SofkaQuestions
