@@ -1,9 +1,16 @@
 import React from 'react'
+import firebase from '../firebase/firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom'
 
-const HomePage = ({children}) => (
-  <section>
-    <h1>Home</h1>
+const auth = firebase.auth();
+
+const HomePage = ({children}) => {
+  const [user] = useAuthState(auth);
+  const name = user ? user.displayName : ""
+
+  return(  <section>
+    <h1 className='mt-4'>Welcome {name}</h1>
     <div>
       {children}
     </div>
@@ -13,5 +20,8 @@ const HomePage = ({children}) => (
     </Link>
   
   </section>
-)
+  )
+
+}
+
 export default HomePage

@@ -25,7 +25,7 @@ const auth = firebase.auth();
 const App = ({ dispatch }) => {
   const [user] = useAuthState(auth);
   if(user){
-    dispatch(login(user.email, user.uid, user.userImage))
+    dispatch(login(user.email, user.uid))
   }
   return (
     <Router>

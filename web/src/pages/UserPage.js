@@ -11,6 +11,8 @@ const UserPage = () => {
     const [imageUrl, setImageUrl] = useState(user.photoURL);
     const [result, setResult] = useState("");
 
+    console.log(user)
+
     const actualizarDatos = (e) => {
         e.preventDefault();
         user.updateProfile({
