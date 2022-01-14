@@ -5,18 +5,34 @@ import { postQuestion } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import JoditEditor from "jodit-react";
 
-const FormPage = ({ dispatch, loading, redirect, userId }) => {
+const FormPage = ({ dispatch, loading, redirect, userId, userEmail }) => {
+    const [formState, setFormState] = useState({
+        type: 'OPEN (LONG OPEN BOX)',
+        category: 'TECHNOLOGY AND COMPUTER'
+    });
     const { register, handleSubmit } = useForm();
     const [content, setContent] = useState("");
     const history = useHistory();
 
-    const onSubmit = data => {
+    const onSubmit = event => {
+        event.preventDefault();
+        const data = {
+            ...formState,
+            userId,
+            question: content.slice(3, -4),
+            userEmail
+        }
         if(content != ""){
-            data.userId = userId;
-            data.question = content.slice(3, -4)   
             dispatch(postQuestion(data));
         }
     };
+
+    const handleInputChange = ({ target }) => {
+        setFormState({
+            ...formState,
+            [target.name]: target.value
+        });
+    }
 
     useEffect(() => {
         if (redirect) {
@@ -28,11 +44,11 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
         <section>
             <h1>New Question</h1>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
 
                 <div>
                     <label for="type">Type</label>
-                    <select {...register("type")} id="">
+                    <select name="type" onChange={handleInputChange} id="">
                         <option value="OPEN (LONG OPEN BOX)">OPEN (LONG OPEN BOX)</option>
                         <option value="OPINION (SHORT OPEN BOX)">OPINION (SHORT OPEN BOX)</option>
                         <option value="WITH RESULT (OPEN BOX WITH LINK)">WITH RESULT (OPEN BOX WITH LINK)</option>
@@ -41,7 +57,7 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
                 </div>
                 <div>
                     <label for="category">Category</label>
-                    <select {...register("category")} id="category">
+                    <select name="category" onChange={handleInputChange} id="category">
                         <option value="TECHNOLOGY AND COMPUTER">TECHNOLOGY AND COMPUTER</option>
                         <option value="SCIENCES">SCIENCES</option>
                         <option value="SOFTWARE DEVELOPMENT">SOFTWARE DEVELOPMENT</option>
@@ -68,7 +84,8 @@ const mapStateToProps = state => ({
     loading: state.question.loading,
     redirect: state.question.redirect,
     hasErrors: state.question.hasErrors,
-    userId: state.auth.uid
+    userId: state.auth.uid,
+    userEmail: state.auth.email
 })
 
 export default connect(mapStateToProps)(FormPage)

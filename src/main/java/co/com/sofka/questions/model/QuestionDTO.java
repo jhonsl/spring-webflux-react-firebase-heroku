@@ -18,11 +18,9 @@ public class QuestionDTO {
     @NotBlank
     private String category;
     private List<AnswerDTO> answers;
+    private String userEmail;
 
-
-    public QuestionDTO() {
-
-    }
+    public QuestionDTO() {}
 
     public QuestionDTO(String userId, String question, String type, String category) {
         this.userId = userId;
@@ -31,12 +29,13 @@ public class QuestionDTO {
         this.category = category;
     }
 
-    public QuestionDTO(String id, String userId, String question, String type, String category) {
+    public QuestionDTO(String id, String userId, String question, String type, String category, String userEmail) {
         this.id = id;
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
+        this.userEmail = userEmail;
     }
 
     public List<AnswerDTO> getAnswers() {
@@ -88,6 +87,14 @@ public class QuestionDTO {
         this.category = category;
     }
 
+    public String getUserEmail() {
+        return this.userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     @Override
     public String toString() {
         return "QuestionDTO{" +
@@ -96,6 +103,7 @@ public class QuestionDTO {
                 ", question='" + question + '\'' +
                 ", type='" + type + '\'' +
                 ", category='" + category + '\'' +
+                ", userEmail='" + userEmail + '\'' +
                 '}';
     }
 
