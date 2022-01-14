@@ -38,9 +38,11 @@ public class AddAnswerUseCase implements SaveAnswer {
                             question.getAnswers().add(answerDTO);
                             sendEmailService.sendEmail(
                                 question.getUserEmail(), 
-                                "Han respondido tu pregunta " + 
-                                question.getQuestion(),
-                                "Respuesta: \n" + answer.getAnswer());
+                                "Han respondido tu pregunta de SoftkaQuestions",
+                                "<h1 style='color: #654321;text-align: center;'>Nueva respuesta</h1>"+
+                                "<p>Un usuario ha hecho el siguiente aporte:</p>" +
+                                "<p><b>Pregunta: </b> ¿" + question.getQuestion() + "?</p>" +
+                                "<p><b>Respuesta: </b> " + answer.getAnswer()+ "</p>");
                             return question;
                         })
         );
